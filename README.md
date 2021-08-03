@@ -48,5 +48,5 @@ To this:
       |_3.png (D)
       |_4.png (E)
 +
-results.pdf
+result.pdf
 ```
