@@ -11,7 +11,7 @@ ___
 2. Run converter
 
     2.1 Windows:
-    - Run `main.exe`.
+    - Run `zip2pdf.exe`.
 
     2.2 Any platform/development:
 
@@ -19,7 +19,7 @@ ___
 
     - Install dependency `pip install Pillow`;
         
-    - Run script `python main.py`.
+    - Run script `python zip2pdf.py`.
 
 3. Check `/images` folder and `result.pdf`
 ___
