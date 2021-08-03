@@ -1,8 +1,7 @@
-from os import walk
+from os import walk, mkdir
 from shutil import move, rmtree
 import zipfile
 from PIL import Image
-import img2pdf
 
 def unpack_zips_from_zip_folder(foldername="./zip"):
     zips = files_list_from_folder(foldername)
@@ -40,11 +39,20 @@ def files_list_from_folder(foldername="./zip"):
         break
     return files
 
+def image_open(name):
+    image = Image.open(name)
+    image.load() # required for png.split()
+
+    rgb = Image.new("RGB", image.size, (255, 255, 255))
+    rgb.paste(image, mask=image.split()[3]) # 3 is the alpha channel
+
+    return rgb
+
 def to_pdf():
     images_names = files_list_from_folder('./images')
-    first_image = Image.open("./images/" + images_names[0])
+    first_image = image_open("./images/" + images_names[0])
 
-    images = list(Image.open("./images/" + image_name) for image_name in images_names[1:])
+    images = list(image_open("./images/" + image_name) for image_name in images_names[1:])
 
     first_image.save("result.pdf", "PDF" ,resolution=100.0, save_all=True, append_images=images)
 
