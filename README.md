@@ -6,7 +6,7 @@ Compiling all extracted images into single `result.pdf`.
 ___
 ### Use:
 
-1. Load your ZIP files to `/zip` folder;
+1. **Load your ZIP files with images to `/zip` folder;**
 
 2. Run converter
 
