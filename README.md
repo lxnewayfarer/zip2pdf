@@ -1,4 +1,4 @@
-## Batch ZIP to single PDF converter
+## Batch images from multiple ZIP to single PDF converter
 
 Unpacking sorted ZIP files with images (.png, .jpg, etc) to `/image` folder, giving unique name (0..N index) to each image.
 
