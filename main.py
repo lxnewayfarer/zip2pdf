@@ -41,10 +41,9 @@ def files_list_from_folder(foldername="./zip"):
 
 def image_open(name):
     image = Image.open(name)
-    image.load() # required for png.split()
-
-    rgb = Image.new("RGB", image.size, (255, 255, 255))
     try:
+        image.load() # required for png.split()
+        rgb = Image.new("RGB", image.size, (255, 255, 255))
         rgb.paste(image, mask=image.split()[3]) # 3 is the alpha channel
     except Exception:
         return image
@@ -58,8 +57,20 @@ def to_pdf():
 
     first_image.save("result.pdf", "PDF" ,resolution=100.0, save_all=True, append_images=images)
 
+def clear_folders():
+    try: 
+        rmtree("images")
+    except Exception:
+        pass
+    try:
+        rmtree("temp")
+    except Exception:
+        pass
+    mkdir("images")
+
 if __name__ == "__main__": 
     duckling()
+    clear_folders()
     unpack_zips_from_zip_folder()
     to_pdf()
 
