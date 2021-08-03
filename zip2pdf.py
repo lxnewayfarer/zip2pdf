@@ -27,7 +27,7 @@ def unpack_zips_from_zip_folder(foldername="./zip"):
             counter += 1
 
         print('[✓]', end='')
-    print('\nDone. Check /images folder')
+    print('\nDone. Check /images folder or result.pdf')
 
 def aliens():
     print(open('.aliens', 'r').read(), end='\n')
