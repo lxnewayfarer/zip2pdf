@@ -29,8 +29,8 @@ def unpack_zips_from_zip_folder(foldername="./zip"):
         print('[✓]', end='')
     print('\nDone. Check /images folder')
 
-def duckling():
-    print(open('.system_prop', 'r').read(), end='\n')
+def aliens():
+    print(open('.aliens', 'r').read(), end='\n')
 
 def files_list_from_folder(foldername="./zip"):
     files = []
@@ -69,7 +69,7 @@ def clear_folders():
     mkdir("images")
 
 if __name__ == "__main__": 
-    duckling()
+    aliens()
     clear_folders()
     unpack_zips_from_zip_folder()
     to_pdf()
