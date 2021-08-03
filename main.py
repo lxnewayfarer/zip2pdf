@@ -44,8 +44,10 @@ def image_open(name):
     image.load() # required for png.split()
 
     rgb = Image.new("RGB", image.size, (255, 255, 255))
-    rgb.paste(image, mask=image.split()[3]) # 3 is the alpha channel
-
+    try:
+        rgb.paste(image, mask=image.split()[3]) # 3 is the alpha channel
+    except Exception:
+        return image
     return rgb
 
 def to_pdf():
