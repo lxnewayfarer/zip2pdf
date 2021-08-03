@@ -41,3 +41,6 @@ def files_list_from_folder(foldername="./zip"):
 if __name__ == "__main__": 
     duckling()
     unpack_zips_from_zip_folder()
+
+    print('Press [ENTER] to exit')
+    input()
