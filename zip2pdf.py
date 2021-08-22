@@ -95,7 +95,3 @@ if __name__ == "__main__":
 
     print("Press [ENTER] to exit")
     input()
-
-
-a = ['0.png', '1.png', '2.png', '10.png', '11.png',
-     '12.png', '13.png', '20.png', '21.png', '22.png']
