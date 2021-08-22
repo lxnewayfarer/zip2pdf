@@ -66,6 +66,7 @@ def image_open(name):
 
 def to_pdf():
     images_names = files_list_from_folder("./images")
+    images_names = sorted(images_names, key=cmp_to_key(compare))
     first_image = image_open("./images/" + images_names[0])
 
     images = list(image_open("./images/" + image_name)
