@@ -2,6 +2,16 @@ from os import walk, mkdir
 from shutil import move, rmtree
 import zipfile
 from PIL import Image
+from functools import cmp_to_key
+
+
+def compare(x, y):
+    x_name = x.split('.')[0]
+    y_name = y.split('.')[0]
+    if x_name.isdigit() and y_name.isdigit():
+        return int(x_name) - int(y_name)
+    else:
+        return (x_name > y_name) - (x_name < y_name)
 
 
 def unpack_zips_from_zip_folder(foldername="./zip"):
@@ -15,14 +25,14 @@ def unpack_zips_from_zip_folder(foldername="./zip"):
     print("\n___________", end="")
 
     # each archive
-    for zip in sorted(zips):
+    for zip in sorted(zips, key=cmp_to_key(compare)):
         with zipfile.ZipFile(foldername + "/" + zip, "r") as zip_ref:
             zip_ref.extractall("./temp")
         # unziped to ./temp
         temp_files = files_list_from_folder("./temp")
         # now move and rename every file in temp folder to images with index [counter] name
 
-        for file in sorted(temp_files):
+        for file in sorted(temp_files, key=cmp_to_key(compare)):
             file_extension = file.split(".")[-1]
             move("temp/" + file, "images/" + str(counter) + "." + file_extension)
             counter += 1
@@ -85,3 +95,7 @@ if __name__ == "__main__":
 
     print("Press [ENTER] to exit")
     input()
+
+
+a = ['0.png', '1.png', '2.png', '10.png', '11.png',
+     '12.png', '13.png', '20.png', '21.png', '22.png']
