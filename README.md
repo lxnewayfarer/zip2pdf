@@ -10,9 +10,6 @@ ___
 
 2. Run converter
 
-    2.1 Windows:
-    - Run `zip2pdf.exe`.
-
     2.2 Any platform/development:
 
     - Install Python 3.x+;
