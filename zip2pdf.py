@@ -5,15 +5,6 @@ from PIL import Image
 from functools import cmp_to_key
 
 
-def compare(x, y):
-    x_name = x.split('.')[0]
-    y_name = y.split('.')[0]
-    if x_name.isdigit() and y_name.isdigit():
-        return int(x_name) - int(y_name)
-    else:
-        return (x_name > y_name) - (x_name < y_name)
-
-
 def unpack_zips_from_zip_folder(foldername="./zip"):
     zips = files_list_from_folder(foldername)
 
@@ -25,14 +16,14 @@ def unpack_zips_from_zip_folder(foldername="./zip"):
     print("\n___________", end="")
 
     # each archive
-    for zip in sorted(zips, key=cmp_to_key(compare)):
+    for zip in zips:
         with zipfile.ZipFile(foldername + "/" + zip, "r") as zip_ref:
             zip_ref.extractall("./temp")
         # unziped to ./temp
         temp_files = files_list_from_folder("./temp")
         # now move and rename every file in temp folder to images with index [counter] name
 
-        for file in sorted(temp_files, key=cmp_to_key(compare)):
+        for file in temp_files:
             file_extension = file.split(".")[-1]
             move("temp/" + file, "images/" + str(counter) + "." + file_extension)
             counter += 1
@@ -45,12 +36,21 @@ def aliens():
     print(open(".aliens", "r").read(), end="\n")
 
 
+def compare(x, y):
+    x_name = x.split('.')[0]
+    y_name = y.split('.')[0]
+    if x_name.isdigit() and y_name.isdigit():
+        return int(x_name) - int(y_name)
+    else:
+        return (x_name > y_name) - (x_name < y_name)
+
+
 def files_list_from_folder(foldername="./zip"):
     files = []
     for dirpath, dirnames, filenames in walk(foldername):
         files.extend(filenames)
         break
-    return files
+    return sorted(files, key=cmp_to_key(compare))
 
 
 def image_open(name):
@@ -66,7 +66,7 @@ def image_open(name):
 
 def to_pdf():
     images_names = files_list_from_folder("./images")
-    images_names = sorted(images_names, key=cmp_to_key(compare))
+
     first_image = image_open("./images/" + images_names[0])
 
     images = list(image_open("./images/" + image_name)
