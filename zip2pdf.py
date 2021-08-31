@@ -37,12 +37,23 @@ def aliens():
 
 
 def compare(x, y):
-    x_name = x.split('.')[0]
-    y_name = y.split('.')[0]
-    if x_name.isdigit() and y_name.isdigit():
-        return int(x_name) - int(y_name)
-    else:
-        return (x_name > y_name) - (x_name < y_name)
+    # remove file extention suffix .png/.jpg
+    x = x[:-4]
+    y = y[:-4]
+
+    # split filename
+    x_splitted = x.split()
+    y_splitted = y.split()
+
+    # find shortest filename
+    shortest_len = min(len(x_splitted), len(y_splitted))
+    for i in range(shortest_len):
+        if x_splitted[i] == y_splitted[i]:
+            continue
+        if x_splitted[i].isdigit() and y_splitted[i].isdigit():
+            return int(x_splitted[i]) - int(y_splitted[i])
+        else:
+            return (x_splitted[i] > y_splitted[i]) - (x_splitted[i] < y_splitted[i])
 
 
 def files_list_from_folder(foldername="./zip"):
