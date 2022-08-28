@@ -2,6 +2,7 @@ from os import walk, mkdir
 from shutil import move, rmtree
 import zipfile
 from PIL import Image
+from natsort import natsorted
 from functools import cmp_to_key
 
 
@@ -36,32 +37,12 @@ def aliens():
     print(open(".aliens", "r").read(), end="\n")
 
 
-def compare(x, y):
-    # remove file extention suffix .png/.jpg
-    x = x[:-4]
-    y = y[:-4]
-
-    # split filename
-    x_splitted = x.split()
-    y_splitted = y.split()
-
-    # find shortest filename
-    shortest_len = min(len(x_splitted), len(y_splitted))
-    for i in range(shortest_len):
-        if x_splitted[i] == y_splitted[i]:
-            continue
-        if x_splitted[i].isdigit() and y_splitted[i].isdigit():
-            return int(x_splitted[i]) - int(y_splitted[i])
-        else:
-            return (x_splitted[i] > y_splitted[i]) - (x_splitted[i] < y_splitted[i])
-
-
 def files_list_from_folder(foldername="./zip"):
     files = []
     for dirpath, dirnames, filenames in walk(foldername):
         files.extend(filenames)
         break
-    return sorted(files, key=cmp_to_key(compare))
+    return natsorted(files)
 
 
 def image_open(name):
