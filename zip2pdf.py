@@ -84,7 +84,7 @@ if __name__ == "__main__":
     aliens()
     clear_folders()
     unpack_zips_from_zip_folder()
-##    to_pdf()
+    to_pdf()
 
     print("Press [ENTER] to exit")
     input()
